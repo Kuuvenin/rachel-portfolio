@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playground — Rachel Ben Ari</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.pg-hero{padding:8rem 2.5rem 3rem;border-bottom:1px solid var(--line)}
+.pg-hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;color:var(--fg);line-height:.95;margin-bottom:1rem}
+.pg-hero h1 em{font-style:italic;color:var(--gold2)}
+.pg-hero p{font-family:var(--serif);font-style:italic;color:var(--fg2);font-size:1rem;max-width:28rem}
+.sec{padding:4rem 2.5rem}
+/* Masonry-style grid */
+.pg-grid{
+  columns:3;column-gap:1px;
+  border:1px solid var(--line);
+  background:var(--line);
+}
+.pg-item{
+  break-inside:avoid;
+  background:var(--bg);
+  display:block;
+  overflow:hidden;
+  margin-bottom:1px;
+  position:relative;
+}
+.pg-item img{width:100%;height:auto;display:block;transition:transform .4s}
+.pg-item:hover img{transform:scale(1.03)}
+.pg-item-overlay{
+  position:absolute;inset:0;
+  background:rgba(11,11,9,.6);
+  display:flex;align-items:flex-end;
+  padding:1rem;
+  opacity:0;transition:opacity .2s;
+}
+.pg-item:hover .pg-item-overlay{opacity:1}
+.pg-item-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg2)}
+@media(max-width:900px){.pg-grid{columns:2}}
+@media(max-width:600px){.pg-grid{columns:1}.pg-hero{padding:7rem 1.5rem 2.5rem}.sec{padding:3rem 1.5rem}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">Rai <span class="star">✦</span> Kuu</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="playground.html" class="active">Playground</a></li>
+  </ul>
+</nav>
+
+<div class="pg-hero fi hero-instant">
+  <h1>Play<br><em>ground</em></h1>
+  <p>Experiments, sketches, and things that don't have a category yet.</p>
+</div>
+
+<section class="sec">
+  <div class="pg-grid">
+    <!-- Using the Framer playground images we scraped -->
+    <a class="pg-item fi" href="#">
+      <img src="../images/AYAmg7TFYiAj0sxyXzWjssEpMQ.png" alt="Playground image 1" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 01</span></div>
+    </a>
+    <a class="pg-item fi d1" href="#">
+      <img src="../images/SxLldlshrAPrCA4G209qxRdde2g.png" alt="Playground image 2" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 02</span></div>
+    </a>
+    <a class="pg-item fi d1" href="#">
+      <img src="../images/dJ5h6KwRXT8LMrrHiyDvhGdSJ4.png" alt="Playground image 3" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 03</span></div>
+    </a>
+    <a class="pg-item fi" href="#">
+      <img src="../images/OyyurPh8BztFt0sjujQz6tWzRwo.png" alt="Playground image 4" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 04</span></div>
+    </a>
+    <a class="pg-item fi d1" href="#">
+      <img src="../images/tjVenH0bNVIrdUdWFZP3rQjqHNY.png" alt="Playground image 5" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 05</span></div>
+    </a>
+    <a class="pg-item fi d2" href="#">
+      <img src="../images/9gKF3vK1drzEMpLFD1Fl0TQWf4I.png" alt="Playground image 6" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 06</span></div>
+    </a>
+    <a class="pg-item fi" href="#">
+      <img src="../images/7oxEeEelt48yIb9TCHHPkBqJudM.png" alt="Playground image 7" loading="lazy">
+      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 07</span></div>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="foot-grid">
+    <div class="foot-cta fi"><div class="foot-cta-label">Interested to work with me?</div><h3>Let's make<br>something strange.</h3><a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a></div>
+    <div class="foot-mid fi d1"><span class="foot-logo">Rai ✦ Kuu</span><div class="foot-clock" id="clock">--:--:--</div></div>
+    <div class="foot-links fi d2"><a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a><a href="#" target="_blank" rel="noopener">Behance ↗</a><a href="#" target="_blank" rel="noopener">Twitter ↗</a><a href="#" target="_blank" rel="noopener">Dribbble ↗</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 Rachel Ben Ari</span><span>Concept &amp; Character Design</span></div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works — Rachel Ben Ari</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.works-hero{padding:8rem 2.5rem 3rem;border-bottom:1px solid var(--line)}
+.works-hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;color:var(--fg);line-height:.95;margin-bottom:1rem}
+.works-hero h1 em{font-style:italic;color:var(--gold2)}
+.works-hero p{font-family:var(--serif);font-style:italic;color:var(--fg2);font-size:1rem;max-width:28rem}
+.sec{padding:4rem 2.5rem}
+.works-list{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);gap:1px;background:var(--line)}
+.wc{display:block;background:var(--bg);padding:2rem;position:relative;overflow:hidden;transition:background .2s}
+.wc:hover{background:var(--bg1)}
+.wt{width:100%;aspect-ratio:16/9;overflow:hidden;margin-bottom:1.4rem;border:1px solid var(--line);background:var(--bg2)}
+.wt img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.wc:hover .wt img{transform:scale(1.03)}
+.wtitle{font-family:var(--serif);font-size:1.35rem;font-weight:400;color:var(--fg);margin-bottom:.25rem}
+.wmeta{display:flex;justify-content:space-between;align-items:flex-start}
+.wtags{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)}
+.wyear{font-size:10px;color:var(--fg3)}
+.warrow{position:absolute;top:2rem;right:2rem;width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--fg2);opacity:0;transform:translateY(5px);transition:opacity .2s,transform .2s}
+.wc:hover .warrow{opacity:1;transform:translateY(0)}
+@media(max-width:720px){.works-hero{padding:7rem 1.5rem 2.5rem}.sec{padding:3rem 1.5rem}.works-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">Rai <span class="star">✦</span> Kuu</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="works.html" class="active">Works</a></li>
+    <li><a href="playground.html">Playground</a></li>
+  </ul>
+</nav>
+
+<div class="works-hero fi hero-instant">
+  <h1>Selected<br><em>Works</em></h1>
+  <p>Branding, UI/UX, 3D, and print — 2025–2026</p>
+</div>
+
+<section class="sec">
+  <div class="works-list">
+    <a href="the-cold-ones.html" class="wc fi">
+      <div class="wt"><img src="../images/8ba9kDVuw7DrFPVCmb6ZIrk99U.png" alt="The Cold Ones" loading="eager"></div>
+      <div class="wmeta"><div><div class="wtitle">The Cold Ones</div><div class="wtags">Branding · UI/UX · Figma</div></div><div class="wyear">2026</div></div>
+      <div class="warrow">↗</div>
+    </a>
+    <a href="necronomichive.html" class="wc fi d1">
+      <div class="wt"><img src="../images/XLxQWt2LHvHVKb1WEt1ZIWTzg.png" alt="Necronomichive" loading="lazy"></div>
+      <div class="wmeta"><div><div class="wtitle">Necronomichive</div><div class="wtags">Branding · UI/UX · Figma</div></div><div class="wyear">2026</div></div>
+      <div class="warrow">↗</div>
+    </a>
+    <a href="little-nightmares.html" class="wc fi d1">
+      <div class="wt"><img src="../images/YsGbc1ycf5HgFdkQFpGicI9fzgs.jpg" alt="Little Nightmares" loading="lazy"></div>
+      <div class="wmeta"><div><div class="wtitle">Little Nightmares</div><div class="wtags">Catalogue · Print · Tarsier Studio</div></div><div class="wyear">2025</div></div>
+      <div class="warrow">↗</div>
+    </a>
+    <a href="crime-scene.html" class="wc fi d2">
+      <div class="wt"><img src="../images/kfKkfp621jHdkz8uD40FteDiOXs.png" alt="Crime Scene" loading="lazy"></div>
+      <div class="wmeta"><div><div class="wtitle">Crime Scene</div><div class="wtags">Brand Design · Product Rendering</div></div><div class="wyear">2026</div></div>
+      <div class="warrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="foot-grid">
+    <div class="foot-cta fi"><div class="foot-cta-label">Interested to work with me?</div><h3>Let's make<br>something strange.</h3><a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a></div>
+    <div class="foot-mid fi d1"><span class="foot-logo">Rai ✦ Kuu</span><div class="foot-clock" id="clock">--:--:--</div></div>
+    <div class="foot-links fi d2"><a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a><a href="#" target="_blank" rel="noopener">Behance ↗</a><a href="#" target="_blank" rel="noopener">Twitter ↗</a><a href="#" target="_blank" rel="noopener">Dribbble ↗</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 Rachel Ben Ari</span><span>Concept &amp; Character Design</span></div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

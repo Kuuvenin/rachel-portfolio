@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachel Ben Ari — Concept &amp; Character Designer</title>
+<meta name="description" content="Portfolio of Rachel Ben Ari, concept and character designer. Branding, UI/UX, 3D, print.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── Page-specific ── */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.hero-l {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem 2.5rem 5rem;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 1.8rem;
+  height: 1px;
+  background: var(--gold);
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6.5vw, 5.8rem);
+  font-weight: 400;
+  line-height: .92;
+  letter-spacing: -.01em;
+  color: var(--fg);
+  margin-bottom: 2rem;
+}
+.hero-name em { font-style: italic; color: var(--gold2); }
+.hero-tagline {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--fg2);
+  max-width: 26rem;
+  line-height: 1.55;
+  margin-bottom: 2.5rem;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fg3);
+}
+.hero-cta-line {
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--fg3);
+  transform-origin: left;
+  animation: sl 2.2s ease-in-out infinite;
+}
+@keyframes sl { 0%,100%{transform:scaleX(0);opacity:0} 50%{transform:scaleX(1);opacity:1} }
+
+.hero-r {
+  background: var(--bg1);
+  position: relative;
+  overflow: hidden;
+}
+.hero-r img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: .85;
+}
+.hero-r-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, var(--bg1) 100%);
+}
+
+/* ── Works index ── */
+.sec { padding: 5.5rem 2.5rem; }
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+  gap: 1px;
+  background: var(--line);
+}
+.work-card {
+  display: block;
+  background: var(--bg);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+.work-card:hover { background: var(--bg1); }
+.work-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  position: relative;
+}
+.work-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s var(--ease);
+}
+.work-card:hover .work-thumb img { transform: scale(1.03); }
+.work-title {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: .25rem;
+}
+.work-row { display: flex; justify-content: space-between; align-items: flex-start; }
+.work-tags { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg3); }
+.work-year { font-size: 10px; color: var(--fg3); }
+.work-arrow {
+  position: absolute; top: 2rem; right: 2rem;
+  width: 1.9rem; height: 1.9rem;
+  border-radius: 50%; border: 1px solid var(--line2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--fg2);
+  opacity: 0; transform: translateY(5px);
+  transition: opacity .2s, transform .2s;
+}
+.work-card:hover .work-arrow { opacity: 1; transform: translateY(0); }
+
+/* ── About strip ── */
+.about-strip {
+  background: var(--bg1);
+  padding: 5.5rem 2.5rem;
+  border-top: 1px solid var(--line);
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-h {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--fg);
+  line-height: 1.15;
+  margin-bottom: 1.4rem;
+}
+.about-h em { font-style: italic; color: var(--gold2); }
+.about-p {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--fg2);
+  line-height: 1.7;
+  margin-bottom: .9rem;
+}
+.skills {
+  margin-top: 1.8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .4rem 2rem;
+}
+.sk {
+  display: flex; align-items: center; gap: .65rem;
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg3); padding: .4rem 0; border-bottom: 1px solid var(--line);
+}
+.sk::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+.about-visual { position: relative; height: 480px; }
+.about-portrait {
+  position: absolute; right: 0; top: 0;
+  width: 78%; height: 82%;
+  background: var(--bg2); border: 1px solid var(--line);
+  overflow: hidden;
+}
+.about-portrait img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+.about-stat {
+  position: absolute; left: 0; bottom: 0;
+  width: 50%; height: 38%;
+  background: var(--bg2); border: 1px solid var(--line2);
+  padding: 1.4rem; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.about-stat .num { font-family: var(--serif); font-size: 3rem; color: var(--gold); line-height:1; }
+.about-stat .lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg3); margin-top:.25rem; }
+
+/* ── Responsive ── */
+@media(max-width:720px){
+  .hero{grid-template-columns:1fr}
+  .hero-r{display:none}
+  .hero-l{padding:7rem 1.5rem 4rem}
+  .sec,.about-strip{padding:3.5rem 1.5rem}
+  .works-grid,.about-grid{grid-template-columns:1fr}
+  .about-visual{height:280px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Rai <span class="star">✦</span> Kuu</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="pages/works.html">Works</a></li>
+    <li><a href="pages/playground.html">Playground</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-l">
+    <div class="eyebrow fi hero-instant">Concept &amp; Character Designer</div>
+    <h1 class="hero-name fi hero-instant d1">Rachel<br><em>Ben Ari</em></h1>
+    <p class="hero-tagline fi hero-instant d2">Hey hey, I'm Rachel — a concept and character designer that loves experimenting and trying new things.</p>
+    <div class="hero-cta fi hero-instant d3">
+      <span class="hero-cta-line"></span>Scroll to explore
+    </div>
+  </div>
+  <div class="hero-r">
+    <!-- Replace with your actual photo: -->
+    <img src="images/Jb14pg4sx1TdlRt5Db4KNPYltXU.png" alt="Rachel Ben Ari" loading="eager">
+    <div class="hero-r-overlay"></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="t-item">Concept Design<span class="dot"> ✦</span></span>
+    <span class="t-item">Character Art<span class="dot"> ✦</span></span>
+    <span class="t-item">UI / UX<span class="dot"> ✦</span></span>
+    <span class="t-item">Branding<span class="dot"> ✦</span></span>
+    <span class="t-item">3D &amp; Blender<span class="dot"> ✦</span></span>
+    <span class="t-item">Print Design<span class="dot"> ✦</span></span>
+    <span class="t-item">Figma<span class="dot"> ✦</span></span>
+    <span class="t-item">Illustration<span class="dot"> ✦</span></span>
+    <span class="t-item">Concept Design<span class="dot"> ✦</span></span>
+    <span class="t-item">Character Art<span class="dot"> ✦</span></span>
+    <span class="t-item">UI / UX<span class="dot"> ✦</span></span>
+    <span class="t-item">Branding<span class="dot"> ✦</span></span>
+    <span class="t-item">3D &amp; Blender<span class="dot"> ✦</span></span>
+    <span class="t-item">Print Design<span class="dot"> ✦</span></span>
+    <span class="t-item">Figma<span class="dot"> ✦</span></span>
+    <span class="t-item">Illustration<span class="dot"> ✦</span></span>
+  </div>
+</div>
+
+<!-- SELECTED WORKS -->
+<section class="sec" id="works">
+  <div class="sec-head fi">
+    <span class="sec-label">Selected Works</span>
+    <span class="sec-meta">2025 — 2026</span>
+  </div>
+  <div class="works-grid">
+
+    <a href="pages/the-cold-ones.html" class="work-card fi">
+      <div class="work-thumb">
+        <img src="images/8ba9kDVuw7DrFPVCmb6ZIrk99U.png" alt="The Cold Ones" loading="lazy">
+      </div>
+      <div class="work-row">
+        <div>
+          <div class="work-title">The Cold Ones</div>
+          <div class="work-tags">Branding · UI/UX · Figma</div>
+        </div>
+        <div class="work-year">2026</div>
+      </div>
+      <div class="work-arrow">↗</div>
+    </a>
+
+    <a href="pages/necronomichive.html" class="work-card fi d1">
+      <div class="work-thumb">
+        <img src="images/XLxQWt2LHvHVKb1WEt1ZIWTzg.png" alt="Necronomichive" loading="lazy">
+      </div>
+      <div class="work-row">
+        <div>
+          <div class="work-title">Necronomichive</div>
+          <div class="work-tags">Branding · UI/UX · Figma</div>
+        </div>
+        <div class="work-year">2026</div>
+      </div>
+      <div class="work-arrow">↗</div>
+    </a>
+
+    <a href="pages/little-nightmares.html" class="work-card fi d1">
+      <div class="work-thumb">
+        <img src="images/YsGbc1ycf5HgFdkQFpGicI9fzgs.jpg" alt="Little Nightmares" loading="lazy">
+      </div>
+      <div class="work-row">
+        <div>
+          <div class="work-title">Little Nightmares</div>
+          <div class="work-tags">Catalogue · Print · Tarsier Studio</div>
+        </div>
+        <div class="work-year">2025</div>
+      </div>
+      <div class="work-arrow">↗</div>
+    </a>
+
+    <a href="pages/crime-scene.html" class="work-card fi d2">
+      <div class="work-thumb">
+        <img src="images/kfKkfp621jHdkz8uD40FteDiOXs.png" alt="Crime Scene" loading="lazy">
+      </div>
+      <div class="work-row">
+        <div>
+          <div class="work-title">Crime Scene</div>
+          <div class="work-tags">Brand Design · Product Rendering</div>
+        </div>
+        <div class="work-year">2026</div>
+      </div>
+      <div class="work-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div class="about-grid">
+    <div class="about-text fi">
+      <div class="sec-label" style="margin-bottom:1.4rem">About me</div>
+      <h2 class="about-h">Design as<br><em>exploration</em></h2>
+      <p class="about-p">I'm Rachel, a concept and character designer based in Israel. I'm drawn to the strange and the atmospheric — work that lives in the margins of genres.</p>
+      <p class="about-p">Whether I'm building a brand identity from scratch, crafting a 3D isometric scene in Blender, or designing UI that feels lived-in and weird — every project is a chance to experiment and try something new.</p>
+      <div class="skills">
+        <div class="sk">Concept Design</div><div class="sk">Character Art</div>
+        <div class="sk">UI / UX Design</div><div class="sk">Branding</div>
+        <div class="sk">3D Modelling</div><div class="sk">Print Design</div>
+        <div class="sk">Figma</div><div class="sk">Blender</div>
+      </div>
+    </div>
+    <div class="about-visual fi d1">
+      <div class="about-portrait">
+        <!-- Replace src with your actual portrait photo -->
+        <img src="images/lNFAdwkoOYt0PWfeGLh8ZT9o2s.gif" alt="Rachel Ben Ari">
+      </div>
+      <div class="about-stat">
+        <div class="num">2026</div>
+        <div class="lbl">Current Year</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="contact">
+  <div class="foot-grid">
+    <div class="foot-cta fi">
+      <div class="foot-cta-label">Interested to work with me?</div>
+      <h3>Let's make<br>something strange.</h3>
+      <a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a>
+    </div>
+    <div class="foot-mid fi d1">
+      <span class="foot-logo">Rai ✦ Kuu</span>
+      <div class="foot-clock" id="clock">--:--:--</div>
+    </div>
+    <div class="foot-links fi d2">
+      <a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="#" target="_blank" rel="noopener">Behance ↗</a>
+      <a href="#" target="_blank" rel="noopener">Twitter ↗</a>
+      <a href="#" target="_blank" rel="noopener">Dribbble ↗</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Rachel Ben Ari</span>
+    <span>Concept &amp; Character Design</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

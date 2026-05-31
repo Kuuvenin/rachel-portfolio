@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cold Ones — Rachel Ben Ari</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/project-page.css">
+</head>
+<body>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">Rai <span class="star">✦</span> Kuu</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="works.html" class="active">Works</a></li>
+    <li><a href="playground.html">Playground</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="proj-hero fi hero-instant">
+  <div class="proj-eyebrow">
+    <a href="../index.html">Home</a>
+    <span class="sep">/</span>
+    <a href="works.html">Works</a>
+    <span class="sep">/</span>
+    <span>The Cold Ones</span>
+  </div>
+  <h1 class="proj-title">The Cold<br>Ones</h1>
+  <div class="proj-meta-row">
+    <div class="proj-meta-item">
+      <div class="label">Year</div>
+      <div class="value">2026</div>
+    </div>
+    <div class="proj-meta-item">
+      <div class="label">Role</div>
+      <div class="value">Brand Design</div>
+    </div>
+    <div class="proj-meta-item">
+      <div class="label">Tools</div>
+      <div class="value">Figma · UI/UX</div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="proj-overview fi">
+  <div class="proj-overview-label">Overview</div>
+  <p class="proj-overview-text">Created as part of an assignment at HiT college, the project reimagines H. P. Lovecraft's fears, beliefs, and fictional universe through web and app design.</p>
+</div>
+
+<!-- GALLERY -->
+<div class="proj-gallery">
+  <div class="proj-img fi">
+    <img src="../images/8ba9kDVuw7DrFPVCmb6ZIrk99U.png" alt="The Cold Ones — hero" loading="eager">
+  </div>
+  <div class="proj-img fi">
+    <img src="../images/g2CvXqywl3jyxXgJHQl4vcsHiAA.gif" alt="The Cold Ones — animation" loading="lazy">
+  </div>
+  <div class="proj-img-grid fi">
+    <div class="proj-img">
+      <img src="../images/3DQ8hrGKtfiun8Ht34m98YlaRM.png" alt="Pixelated flat icons" loading="lazy">
+    </div>
+    <div class="proj-img">
+      <img src="../images/KtEX7Uwvql6MIc86Mhd2OCpvpk.png" alt="Multiple pixelated flat icons" loading="lazy">
+    </div>
+  </div>
+  <div class="proj-img fi">
+    <img src="../images/xl8iTSDbgEHcEiWUnXTxBOLUAb0.gif" alt="The Cold Ones — full animation" loading="lazy">
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="proj-nav fi">
+  <a href="../index.html"><span class="arrow">←</span> All Works</a>
+  <span class="proj-nav-center">Rai ✦ Kuu</span>
+  <a href="necronomichive.html">Necronomichive <span class="arrow">→</span></a>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="contact">
+  <div class="foot-grid">
+    <div class="foot-cta fi">
+      <div class="foot-cta-label">Interested to work with me?</div>
+      <h3>Let's make<br>something strange.</h3>
+      <a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a>
+    </div>
+    <div class="foot-mid fi d1">
+      <span class="foot-logo">Rai ✦ Kuu</span>
+      <div class="foot-clock" id="clock">--:--:--</div>
+    </div>
+    <div class="foot-links fi d2">
+      <a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="#" target="_blank" rel="noopener">Behance ↗</a>
+      <a href="#" target="_blank" rel="noopener">Twitter ↗</a>
+      <a href="#" target="_blank" rel="noopener">Dribbble ↗</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Rachel Ben Ari</span>
+    <span>Concept &amp; Character Design</span>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+// Lazy image fade-in
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  img.addEventListener('load', () => img.classList.add('loaded'));
+  if (img.complete) img.classList.add('loaded');
+});
+</script>
+</body>
+</html>
