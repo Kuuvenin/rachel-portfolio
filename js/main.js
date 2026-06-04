@@ -38,6 +38,43 @@ setInterval(tick, 1000);
   }
 })();
 
+// ── Spooky dancing text — splits letters into spans with staggered delays
+(function () {
+  const el = document.querySelector('.spooky-text');
+  if (!el) return;
+  let i = 0;
+  function wrap(node) {
+    if (node.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      for (const ch of node.textContent) {
+        if (ch.trim() === '') { frag.appendChild(document.createTextNode(ch)); }
+        else {
+          const s = document.createElement('span');
+          s.textContent = ch;
+          s.style.animationDelay = ((i++ * 0.11) % 2.4).toFixed(2) + 's';
+          frag.appendChild(s);
+        }
+      }
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === 1) {
+      Array.from(node.childNodes).forEach(wrap);
+    }
+  }
+  Array.from(el.childNodes).forEach(wrap);
+})();
+
+// ── About photo slideshow (4 seconds per photo, 0.6s crossfade)
+(function () {
+  const slides = document.querySelectorAll('.about-slideshow .slide');
+  if (slides.length < 2) return;
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 3000);
+})();
+
 // ── Mark active nav link
 (function () {
   const path = window.location.pathname.replace(/\/$/, '') || '/';

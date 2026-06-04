@@ -68,6 +68,35 @@
   line-height: 1.65;
 }
 
+/* Case study full image */
+.proj-case-study { padding: 0 4rem; }
+.proj-case-study img { width: 100%; display: block; height: auto; max-width: 1200px; margin: 0 auto; }
+
+/* Overlay container for GIFs/video on case study */
+.case-overlay-container { position: relative; max-width: 1200px; margin: 0 auto; }
+.case-overlay-container > img { width: 100%; display: block; height: auto; }
+
+/* Individual GIF overlays pinned to yellow-dot positions */
+.case-gif-overlay {
+  position: absolute;
+  width: 19%;
+  height: auto;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 4px;
+}
+
+/* Video overlay pinned to yellow-dot position */
+.case-video-overlay {
+  position: absolute;
+  width: 44%;
+  transform: translate(-50%, -50%);
+  border-radius: 125px;
+  z-index: 2;
+  display: block;
+}
+
 /* Image gallery */
 .proj-gallery {
   padding: 0;
@@ -98,6 +127,29 @@
 }
 .proj-img-grid .proj-img { border-bottom: none; }
 
+/* Compact top nav bar between projects */
+.proj-topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .9rem 2.5rem;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5,13,22,.4);
+}
+.proj-topnav a {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fg3);
+  transition: color .15s;
+}
+.proj-topnav a:hover { color: var(--gold); }
+.proj-topnav .arrow { font-size: 13px; }
+.proj-topnav .spacer { flex: 1; }
+
 /* Nav between projects */
 .proj-nav {
   display: flex;
@@ -119,6 +171,7 @@
 .proj-nav a:hover { color: var(--fg); }
 .proj-nav .arrow { font-size: 16px; }
 .proj-nav-center {
+  display: none;
   font-family: var(--serif);
   font-size: .85rem;
   color: var(--fg3);
@@ -131,4 +184,5 @@
   .proj-meta-row { gap: 2rem; flex-wrap: wrap; }
   .proj-img-grid { grid-template-columns: 1fr; }
   .proj-nav { padding: 2rem 1.5rem; }
+  .proj-topnav { padding: .9rem 1.5rem; }
 }

@@ -4,38 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Playground — Rachel Ben Ari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&family=Nunito+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <style>
 .pg-hero{padding:8rem 2.5rem 3rem;border-bottom:1px solid var(--line)}
-.pg-hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;color:var(--fg);line-height:.95;margin-bottom:1rem}
+.pg-hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;color:var(--gold);line-height:.95;margin-bottom:1rem}
 .pg-hero h1 em{font-style:italic;color:var(--gold2)}
-.pg-hero p{font-family:var(--serif);font-style:italic;color:var(--fg2);font-size:1rem;max-width:28rem}
+.pg-hero p{font-family:var(--sans);font-style:italic;color:var(--fg2);font-size:1rem;max-width:28rem}
+
 .sec{padding:4rem 2.5rem}
-/* Masonry-style grid */
-.pg-grid{
-  columns:3;column-gap:1px;
-  border:1px solid var(--line);
-  background:var(--line);
+
+/* Category sections */
+.pg-section{margin-bottom:4rem}
+.pg-category-label{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);padding-bottom:.75rem;
+  border-bottom:1px solid var(--line);margin-bottom:1px;
+  display:flex;align-items:center;gap:.8rem;
 }
+.pg-category-label::before{content:'';width:1.8rem;height:1px;background:var(--gold)}
+
+/* Masonry grid */
+.pg-grid{columns:3;column-gap:1px;background:var(--line)}
 .pg-item{
-  break-inside:avoid;
-  background:var(--bg);
-  display:block;
-  overflow:hidden;
-  margin-bottom:1px;
-  position:relative;
+  break-inside:avoid;background:var(--bg);
+  display:flex;justify-content:center;align-items:center;
+  overflow:hidden;margin-bottom:1px;position:relative;
 }
-.pg-item img{width:100%;height:auto;display:block;transition:transform .4s}
+/* Cap height so vertical images shrink & center; horizontal images fill width */
+.pg-item img{
+  width:auto;max-width:100%;height:auto;max-height:440px;
+  display:block;transition:transform .4s;
+}
 .pg-item:hover img{transform:scale(1.03)}
 .pg-item-overlay{
-  position:absolute;inset:0;
-  background:rgba(11,11,9,.6);
-  display:flex;align-items:flex-end;
-  padding:1rem;
+  position:absolute;inset:0;background:rgba(5,13,22,.65);
+  display:flex;align-items:flex-end;padding:1rem;
   opacity:0;transition:opacity .2s;
 }
 .pg-item:hover .pg-item-overlay{opacity:1}
 .pg-item-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg2)}
+
+/* Video cards */
+.pg-video{
+  break-inside:avoid;background:transparent;margin-bottom:1px;
+  position:relative;cursor:pointer;
+  display:block;font-size:0;
+}
+.pg-video video{width:100%;height:auto;display:block;pointer-events:none;}
+.pg-play-btn{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(5,13,22,.4);transition:background .2s;
+}
+.pg-play-btn svg{width:52px;height:52px;}
+.pg-video:hover .pg-play-btn{background:rgba(5,13,22,.15);}
+
+/* Lightbox — smooth fade+scale */
+.vid-lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(5,13,22,.92);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s var(--ease);
+}
+.vid-lightbox.open{opacity:1;pointer-events:all;}
+.vid-lightbox video{
+  max-width:88vw;max-height:88vh;
+  width:auto;height:auto;
+  cursor:default;
+  border-radius:8px;
+  box-shadow:0 24px 80px rgba(0,0,0,.7);
+  transform:scale(.88);
+  transition:transform .35s var(--ease);
+}
+.vid-lightbox.open video{transform:scale(1);}
+
+/* Image lightbox */
+.img-peek{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(5,13,22,.92);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s var(--ease);
+  cursor:pointer;
+}
+.img-peek.open{opacity:1;pointer-events:all;}
+.img-peek img{
+  max-width:88vw;max-height:88vh;object-fit:contain;border-radius:4px;
+  transform:scale(.88);transition:transform .35s var(--ease);
+  cursor:default;
+}
+.img-peek.open img{transform:scale(1);}
+.vid-lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:2.5rem;height:2.5rem;border-radius:50%;
+  background:rgba(233,217,218,.1);border:1px solid rgba(233,217,218,.2);
+  color:var(--fg);font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .15s;
+}
+.vid-lightbox-close:hover{background:rgba(233,217,218,.2);}
+
 @media(max-width:900px){.pg-grid{columns:2}}
 @media(max-width:600px){.pg-grid{columns:1}.pg-hero{padding:7rem 1.5rem 2.5rem}.sec{padding:3rem 1.5rem}}
 </style>
@@ -46,59 +118,206 @@
   <a href="../index.html" class="nav-logo">Rai <span class="star">✦</span> Kuu</a>
   <ul class="nav-links">
     <li><a href="../index.html">Home</a></li>
-    <li><a href="works.html">Works</a></li>
+    <li><a href="../index.html#works">Works</a></li>
     <li><a href="playground.html" class="active">Playground</a></li>
   </ul>
+  <a href="../index.html#about" class="nav-about-link">
+    <span class="nav-about-label">About me</span>
+    <div class="nav-icon"><img src="../images/nav-logo.png" alt="About me"></div>
+  </a>
 </nav>
 
 <div class="pg-hero fi hero-instant">
-  <h1>Play<br><em>ground</em></h1>
-  <p>Experiments, sketches, and things that don't have a category yet.</p>
+  <h1>Play<em>ground</em></h1>
+  <p>A playground for sketches, animations, character designs, and creative experiments. A glimpse into the ideas, explorations, and happy accidents behind my work.</p>
 </div>
 
 <section class="sec">
-  <div class="pg-grid">
-    <!-- Using the Framer playground images we scraped -->
-    <a class="pg-item fi" href="#">
-      <img src="../images/AYAmg7TFYiAj0sxyXzWjssEpMQ.png" alt="Playground image 1" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 01</span></div>
-    </a>
-    <a class="pg-item fi d1" href="#">
-      <img src="../images/SxLldlshrAPrCA4G209qxRdde2g.png" alt="Playground image 2" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 02</span></div>
-    </a>
-    <a class="pg-item fi d1" href="#">
-      <img src="../images/dJ5h6KwRXT8LMrrHiyDvhGdSJ4.png" alt="Playground image 3" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 03</span></div>
-    </a>
-    <a class="pg-item fi" href="#">
-      <img src="../images/OyyurPh8BztFt0sjujQz6tWzRwo.png" alt="Playground image 4" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 04</span></div>
-    </a>
-    <a class="pg-item fi d1" href="#">
-      <img src="../images/tjVenH0bNVIrdUdWFZP3rQjqHNY.png" alt="Playground image 5" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 05</span></div>
-    </a>
-    <a class="pg-item fi d2" href="#">
-      <img src="../images/9gKF3vK1drzEMpLFD1Fl0TQWf4I.png" alt="Playground image 6" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 06</span></div>
-    </a>
-    <a class="pg-item fi" href="#">
-      <img src="../images/7oxEeEelt48yIb9TCHHPkBqJudM.png" alt="Playground image 7" loading="lazy">
-      <div class="pg-item-overlay"><span class="pg-item-label">Sketch 07</span></div>
-    </a>
+
+  <!-- ── Videos ── -->
+  <div class="pg-section">
+    <div class="pg-category-label">Videos</div>
+    <div class="pg-grid">
+
+      <div class="pg-video fi">
+        <video src="../images/Mysterious.cats - Final.mp4" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+      <div class="pg-video sm fi d1">
+        <video src="../images/Poster in motion.mp4" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+      <div class="pg-video fi d1">
+        <!-- Convert Room_Render.mkv to .mp4 then update this src -->
+        <video src="../images/Room_Render.mkv" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+      <div class="pg-video sm fi" data-loop>
+        <video src="../images/kuu.dialogue.mp4" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+      <div class="pg-video sm fi d1" data-loop>
+        <video src="../images/Tvinka.Idle.mp4" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+      <div class="pg-video sm fi d1" data-loop>
+        <video src="../images/Slime.enemy.mp4" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+      <div class="pg-video sm fi d2" data-loop>
+        <video src="../images/Pokemon ranger.mp4" preload="metadata"></video>
+        <div class="pg-play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="#E9D9DA" stroke-width="1.5"/><path d="M21 17l16 9-16 9V17z" fill="#E9D9DA"/></svg></div>
+      </div>
+
+    </div>
   </div>
+
+  <!-- ── Sketches ── -->
+  <div class="pg-section">
+    <div class="pg-category-label">Sketches</div>
+    <div class="pg-grid">
+
+      <a class="pg-item fi" href="#">
+        <img src="../images/Sketch -1.png" alt="Sketch 1" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 01</span></div>
+      </a>
+      <a class="pg-item fi d1" href="#">
+        <img src="../images/Sketch -2.png" alt="Sketch 2" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 02</span></div>
+      </a>
+      <a class="pg-item fi" href="#">
+        <img src="../images/Sketch - 3.png" alt="Sketch 3" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 03</span></div>
+      </a>
+      <a class="pg-item fi d1" href="#">
+        <img src="../images/Sketch - 4.png" alt="Sketch 4" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 04</span></div>
+      </a>
+      <a class="pg-item fi d2" href="#">
+        <img src="../images/Sketch - 5.png" alt="Sketch 5" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 05</span></div>
+      </a>
+      <a class="pg-item fi" href="#">
+        <img src="../images/Sketch - 6.png" alt="Sketch 6" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 06</span></div>
+      </a>
+      <a class="pg-item fi d1" href="#">
+        <img src="../images/Sketch - 7.png" alt="Sketch 7" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 07</span></div>
+      </a>
+      <a class="pg-item fi d2" href="#">
+        <img src="../images/Sketch - 8.png" alt="Sketch 8" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 08</span></div>
+      </a>
+      <a class="pg-item fi" href="#">
+        <img src="../images/Sketch - 9.png" alt="Sketch 9" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 09</span></div>
+      </a>
+      <a class="pg-item fi d1" href="#">
+        <img src="../images/Sketch - 10.png" alt="Sketch 10" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 10</span></div>
+      </a>
+      <a class="pg-item fi" href="#">
+        <img src="../images/Sketch - 11.png" alt="Sketch 11" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 11</span></div>
+      </a>
+      <a class="pg-item fi d1" href="#">
+        <img src="../images/Sketch - 12.png" alt="Sketch 12" loading="lazy">
+        <div class="pg-item-overlay"><span class="pg-item-label">Sketch 12</span></div>
+      </a>
+
+    </div>
+  </div>
+
 </section>
 
 <footer class="site-footer" id="contact">
   <div class="foot-grid">
-    <div class="foot-cta fi"><div class="foot-cta-label">Interested to work with me?</div><h3>Let's make<br>something strange.</h3><a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a></div>
-    <div class="foot-mid fi d1"><span class="foot-logo">Rai ✦ Kuu</span><div class="foot-clock" id="clock">--:--:--</div></div>
-    <div class="foot-links fi d2"><a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a><a href="#" target="_blank" rel="noopener">Behance ↗</a><a href="#" target="_blank" rel="noopener">Twitter ↗</a><a href="#" target="_blank" rel="noopener">Dribbble ↗</a></div>
+    <div class="foot-cta fi">
+      <div class="foot-cta-label">Interested to work with me?</div>
+      <h3 class="spooky-text">Let's make<br>something strange.</h3>
+      <a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a>
+    </div>
+    <div class="foot-mid fi d1">
+      <span class="foot-logo">Rai ✦ Kuu</span>
+      <div class="foot-clock" id="clock">--:--:--</div>
+    </div>
+    <div class="foot-links fi d2">
+      <a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a>
+    </div>
   </div>
-  <div class="foot-bottom"><span>© 2026 Rachel Ben Ari</span><span>Concept &amp; Character Design</span></div>
+  <div class="foot-bottom">
+    <span>© 2026 Rachel Ben Ari</span>
+    <span>Concept &amp; Character Design</span>
+  </div>
 </footer>
 
+<!-- Video lightbox -->
+<div class="vid-lightbox" id="vidLightbox">
+  <div class="vid-lightbox-close" id="vidClose">✕</div>
+  <video id="vidLightboxPlayer" controls></video>
+</div>
+
+<!-- Image lightbox -->
+<div class="img-peek" id="imgPeek">
+  <div class="vid-lightbox-close" id="imgClose">✕</div>
+  <img id="imgPeekEl" src="" alt="">
+</div>
+
 <script src="../js/main.js"></script>
+<script>
+// ── Video lightbox
+const lightbox = document.getElementById('vidLightbox');
+const player   = document.getElementById('vidLightboxPlayer');
+const vidClose = document.getElementById('vidClose');
+
+function openVideo(src, shouldLoop) {
+  player.src = src;
+  player.loop = !!shouldLoop;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  player.play();
+}
+function closeVideo() {
+  player.pause();
+  player.src = '';
+  player.loop = false;
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.pg-video').forEach(card => {
+  const video = card.querySelector('video');
+  if (!video) return;
+  card.addEventListener('click', () => openVideo(video.src, card.hasAttribute('data-loop')));
+});
+
+vidClose.addEventListener('click', e => { e.stopPropagation(); closeVideo(); });
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeVideo(); });
+
+// ── Image lightbox (click to open, click outside or ✕ to close)
+const imgPeek   = document.getElementById('imgPeek');
+const imgPeekEl = document.getElementById('imgPeekEl');
+const imgClose  = document.getElementById('imgClose');
+
+function openPeek(src) { imgPeekEl.src = src; imgPeek.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closePeek()   { imgPeek.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.querySelectorAll('.pg-item').forEach(card => {
+  const img = card.querySelector('img');
+  if (!img) return;
+  card.addEventListener('click', e => { e.preventDefault(); openPeek(img.src); });
+});
+
+imgClose.addEventListener('click', e => { e.stopPropagation(); closePeek(); });
+imgPeek.addEventListener('click', e => { if (e.target === imgPeek) closePeek(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeVideo(); closePeek(); } });
+</script>
 </body>
 </html>

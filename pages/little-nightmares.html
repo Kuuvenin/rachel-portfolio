@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Little Nightmares — Rachel Ben Ari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&family=Nunito+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/project-page.css">
 </head>
@@ -13,69 +16,52 @@
   <a href="../index.html" class="nav-logo">Rai <span class="star">✦</span> Kuu</a>
   <ul class="nav-links">
     <li><a href="../index.html">Home</a></li>
-    <li><a href="works.html" class="active">Works</a></li>
+    <li><a href="../index.html#works" class="active">Works</a></li>
     <li><a href="playground.html">Playground</a></li>
   </ul>
+  <a href="../index.html#about" class="nav-about-link">
+    <span class="nav-about-label">About me</span>
+    <div class="nav-icon"><img src="../images/nav-logo.png" alt="About me"></div>
+  </a>
 </nav>
 
 <div class="proj-hero fi hero-instant">
   <div class="proj-eyebrow">
     <a href="../index.html">Home</a><span class="sep">/</span>
-    <a href="works.html">Works</a><span class="sep">/</span>
+    <a href="../index.html#works">Works</a><span class="sep">/</span>
     <span>Little Nightmares</span>
   </div>
-  <h1 class="proj-title">Little<br>Nightmares</h1>
+  <h1 class="proj-title" style="color:#A59332">Little<br>Nightmares</h1>
   <div class="proj-meta-row">
     <div class="proj-meta-item"><div class="label">Year</div><div class="value">2025</div></div>
     <div class="proj-meta-item"><div class="label">Role</div><div class="value">Editor</div></div>
     <div class="proj-meta-item"><div class="label">Type</div><div class="value">Catalogue · Print</div></div>
-    <div class="proj-meta-item"><div class="label">Client</div><div class="value">Tarsier Studio</div></div>
+    <div class="proj-meta-item"><div class="label">Context</div><div class="value">Student Project</div></div>
   </div>
 </div>
 
-<div class="proj-overview fi">
-  <div class="proj-overview-label">Overview</div>
-  <p class="proj-overview-text">A printed catalogue created for Tarsier Studio's Little Nightmares universe — exploring the dark, atmospheric world of the games through editorial layout and typographic design.</p>
+<!-- TOP PROJECT NAV -->
+<div class="proj-topnav">
+  <a href="necronomichive.html"><span class="arrow">←</span> Necronomichive</a>
+  <a href="playground.html">Playground <span class="arrow">→</span></a>
 </div>
 
-<div class="proj-gallery">
-  <div class="proj-img-grid fi">
-    <div class="proj-img">
-      <img src="../images/YsGbc1ycf5HgFdkQFpGicI9fzgs.jpg" alt="Little Nightmares spread 1" loading="eager">
-    </div>
-    <div class="proj-img">
-      <img src="../images/5Y65t2ecaBZYEZSZpyNMfzreZI.jpg" alt="Little Nightmares spread 2" loading="eager">
-    </div>
-  </div>
-  <div class="proj-img-grid fi">
-    <div class="proj-img">
-      <img src="../images/mS6ZpPhbxQcixdhXb4StW6O37VM.jpg" alt="Little Nightmares spread 3" loading="lazy">
-    </div>
-    <div class="proj-img">
-      <img src="../images/ZokVONgUwEmk0auVQRIH2DBuGY.jpg" alt="Little Nightmares spread 4" loading="lazy">
-    </div>
-  </div>
-  <div class="proj-img-grid fi">
-    <div class="proj-img">
-      <img src="../images/p5h4yRCzEGbIUrJNoTpnzYJH3ow.jpg" alt="Little Nightmares spread 5" loading="lazy">
-    </div>
-    <div class="proj-img">
-      <img src="../images/DEIqbNjkqPdZZ2HUmFzErRdQSbs.jpg" alt="Little Nightmares spread 6" loading="lazy">
-    </div>
-  </div>
+<!-- CASE STUDY -->
+<div class="proj-case-study">
+  <img src="../images/case-little-nightmares.png" alt="Little Nightmares case study">
 </div>
 
 <div class="proj-nav fi">
   <a href="necronomichive.html"><span class="arrow">←</span> Necronomichive</a>
   <span class="proj-nav-center">Rai ✦ Kuu</span>
-  <a href="crime-scene.html">Crime Scene <span class="arrow">→</span></a>
+  <a href="playground.html">Playground <span class="arrow">→</span></a>
 </div>
 
 <footer class="site-footer" id="contact">
   <div class="foot-grid">
     <div class="foot-cta fi">
       <div class="foot-cta-label">Interested to work with me?</div>
-      <h3>Let's make<br>something strange.</h3>
+      <h3 class="spooky-text">Let's make<br>something strange.</h3>
       <a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a>
     </div>
     <div class="foot-mid fi d1">
@@ -84,9 +70,6 @@
     </div>
     <div class="foot-links fi d2">
       <a href="https://www.instagram.com/kuuvenin/" target="_blank" rel="noopener">Instagram ↗</a>
-      <a href="#" target="_blank" rel="noopener">Behance ↗</a>
-      <a href="#" target="_blank" rel="noopener">Twitter ↗</a>
-      <a href="#" target="_blank" rel="noopener">Dribbble ↗</a>
     </div>
   </div>
   <div class="foot-bottom">
@@ -96,11 +79,5 @@
 </footer>
 
 <script src="../js/main.js"></script>
-<script>
-document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-  img.addEventListener('load', () => img.classList.add('loaded'));
-  if (img.complete) img.classList.add('loaded');
-});
-</script>
 </body>
 </html>
