@@ -185,6 +185,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.15;
   margin-bottom: .7rem;
 }
+.foot-cta h3 em { font-style: normal; font-weight: 900; color: var(--gold2); }
 .foot-email {
   color: var(--gold);
   font-size: 11px;
@@ -195,6 +196,14 @@ a { color: inherit; text-decoration: none; }
 }
 .foot-email:hover { border-color: var(--gold); }
 .foot-mid { text-align: center; }
+.foot-logo-img {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto .6rem;
+}
 .foot-logo {
   display: block;
   font-family: var(--serif);

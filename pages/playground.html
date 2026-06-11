@@ -108,8 +108,26 @@
 }
 .vid-lightbox-close:hover{background:rgba(233,217,218,.2);}
 
+/* Lightbox prev/next arrows */
+.lb-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:3rem;height:3rem;border-radius:50%;
+  background:rgba(233,217,218,.08);
+  border:1px solid rgba(233,217,218,.2);
+  color:var(--fg);font-size:1.6rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:5;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.lb-arrow:hover{background:var(--gold);border-color:var(--gold);color:#fff;}
+.lb-prev{left:1.5rem;}
+.lb-next{right:1.5rem;}
+
 @media(max-width:900px){.pg-grid{columns:2}}
-@media(max-width:600px){.pg-grid{columns:1}.pg-hero{padding:7rem 1.5rem 2.5rem}.sec{padding:3rem 1.5rem}}
+@media(max-width:600px){
+  .pg-grid{columns:1}.pg-hero{padding:7rem 1.5rem 2.5rem}.sec{padding:3rem 1.5rem}
+  .lb-arrow{width:2.4rem;height:2.4rem;font-size:1.3rem;}.lb-prev{left:.6rem;}.lb-next{right:.6rem;}
+}
 </style>
 </head>
 <body>
@@ -241,10 +259,11 @@
   <div class="foot-grid">
     <div class="foot-cta fi">
       <div class="foot-cta-label">Interested to work with me?</div>
-      <h3 class="spooky-text">Let's make<br>something strange.</h3>
+      <h3 class="spooky-text">Let's make<br><em>something strange.</em></h3>
       <a class="foot-email" href="mailto:Rachel2benari@gmail.com">Rachel2benari@gmail.com</a>
     </div>
     <div class="foot-mid fi d1">
+      <img class="foot-logo-img" src="../images/nav-logo.png" alt="Rai + Kuu logo">
       <span class="foot-logo">Rai ✦ Kuu</span>
       <div class="foot-clock" id="clock">--:--:--</div>
     </div>
@@ -261,12 +280,16 @@
 <!-- Video lightbox -->
 <div class="vid-lightbox" id="vidLightbox">
   <div class="vid-lightbox-close" id="vidClose">✕</div>
-  <video id="vidLightboxPlayer" controls></video>
+  <button class="lb-arrow lb-prev" id="vidPrev" aria-label="Previous">‹</button>
+  <button class="lb-arrow lb-next" id="vidNext" aria-label="Next">›</button>
+  <video id="vidLightboxPlayer" controls controlsList="nodownload" disablePictureInPicture></video>
 </div>
 
 <!-- Image lightbox -->
 <div class="img-peek" id="imgPeek">
   <div class="vid-lightbox-close" id="imgClose">✕</div>
+  <button class="lb-arrow lb-prev" id="imgPrev" aria-label="Previous">‹</button>
+  <button class="lb-arrow lb-next" id="imgNext" aria-label="Next">›</button>
   <img id="imgPeekEl" src="" alt="">
 </div>
 
@@ -276,13 +299,23 @@
 const lightbox = document.getElementById('vidLightbox');
 const player   = document.getElementById('vidLightboxPlayer');
 const vidClose = document.getElementById('vidClose');
+const vidPrev  = document.getElementById('vidPrev');
+const vidNext  = document.getElementById('vidNext');
+const videoCards = [...document.querySelectorAll('.pg-video')];
+let vidIndex = 0;
 
-function openVideo(src, shouldLoop) {
-  player.src = src;
-  player.loop = !!shouldLoop;
+function showVideo(i) {
+  vidIndex = (i + videoCards.length) % videoCards.length;
+  const card = videoCards[vidIndex];
+  const video = card.querySelector('video');
+  player.src = video.src;
+  player.loop = card.hasAttribute('data-loop');
+  player.play();
+}
+function openVideo(i) {
+  showVideo(i);
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
-  player.play();
 }
 function closeVideo() {
   player.pause();
@@ -292,32 +325,56 @@ function closeVideo() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.pg-video').forEach(card => {
-  const video = card.querySelector('video');
-  if (!video) return;
-  card.addEventListener('click', () => openVideo(video.src, card.hasAttribute('data-loop')));
+videoCards.forEach((card, i) => {
+  card.addEventListener('click', () => openVideo(i));
 });
 
 vidClose.addEventListener('click', e => { e.stopPropagation(); closeVideo(); });
+vidPrev.addEventListener('click', e => { e.stopPropagation(); showVideo(vidIndex - 1); });
+vidNext.addEventListener('click', e => { e.stopPropagation(); showVideo(vidIndex + 1); });
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeVideo(); });
 
-// ── Image lightbox (click to open, click outside or ✕ to close)
+// ── Image lightbox
 const imgPeek   = document.getElementById('imgPeek');
 const imgPeekEl = document.getElementById('imgPeekEl');
 const imgClose  = document.getElementById('imgClose');
+const imgPrev   = document.getElementById('imgPrev');
+const imgNext   = document.getElementById('imgNext');
+const imgCards  = [...document.querySelectorAll('.pg-item')];
+let imgIndex = 0;
 
-function openPeek(src) { imgPeekEl.src = src; imgPeek.classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closePeek()   { imgPeek.classList.remove('open'); document.body.style.overflow = ''; }
+function showImage(i) {
+  imgIndex = (i + imgCards.length) % imgCards.length;
+  imgPeekEl.src = imgCards[imgIndex].querySelector('img').src;
+}
+function openPeek(i) {
+  showImage(i);
+  imgPeek.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePeek() { imgPeek.classList.remove('open'); document.body.style.overflow = ''; }
 
-document.querySelectorAll('.pg-item').forEach(card => {
-  const img = card.querySelector('img');
-  if (!img) return;
-  card.addEventListener('click', e => { e.preventDefault(); openPeek(img.src); });
+imgCards.forEach((card, i) => {
+  card.addEventListener('click', e => { e.preventDefault(); openPeek(i); });
 });
 
 imgClose.addEventListener('click', e => { e.stopPropagation(); closePeek(); });
+imgPrev.addEventListener('click', e => { e.stopPropagation(); showImage(imgIndex - 1); });
+imgNext.addEventListener('click', e => { e.stopPropagation(); showImage(imgIndex + 1); });
 imgPeek.addEventListener('click', e => { if (e.target === imgPeek) closePeek(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeVideo(); closePeek(); } });
+
+// ── Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (lightbox.classList.contains('open')) {
+    if (e.key === 'Escape') closeVideo();
+    else if (e.key === 'ArrowLeft')  showVideo(vidIndex - 1);
+    else if (e.key === 'ArrowRight') showVideo(vidIndex + 1);
+  } else if (imgPeek.classList.contains('open')) {
+    if (e.key === 'Escape') closePeek();
+    else if (e.key === 'ArrowLeft')  showImage(imgIndex - 1);
+    else if (e.key === 'ArrowRight') showImage(imgIndex + 1);
+  }
+});
 </script>
 </body>
 </html>
