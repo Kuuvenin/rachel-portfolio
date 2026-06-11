@@ -154,7 +154,7 @@
 
   <!-- ── Videos ── -->
   <div class="pg-section">
-    <div class="pg-category-label">Videos</div>
+    <div class="pg-category-label">Animations</div>
     <div class="pg-grid">
 
       <div class="pg-video fi">
@@ -272,7 +272,7 @@
   </div>
   <div class="foot-bottom">
     <span>© 2026 Rachel Ben Ari</span>
-    <span>Concept &amp; Character Design</span>
+    <span>UX/UI • Character Design • Storytelling</span>
   </div>
 </footer>
 
@@ -294,85 +294,85 @@
 
 <script src="../js/main.js"></script>
 <script>
-// ── Video lightbox
+// ── Unified playground lightbox (animations + sketches in one sequence)
 const lightbox = document.getElementById('vidLightbox');
 const player   = document.getElementById('vidLightboxPlayer');
 const vidClose = document.getElementById('vidClose');
 const vidPrev  = document.getElementById('vidPrev');
 const vidNext  = document.getElementById('vidNext');
-const videoCards = [...document.querySelectorAll('.pg-video')];
-let vidIndex = 0;
-
-function showVideo(i) {
-  vidIndex = (i + videoCards.length) % videoCards.length;
-  const card = videoCards[vidIndex];
-  const video = card.querySelector('video');
-  player.src = video.src;
-  player.loop = card.hasAttribute('data-loop');
-  player.play();
-}
-function openVideo(i) {
-  showVideo(i);
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeVideo() {
-  player.pause();
-  player.src = '';
-  player.loop = false;
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-videoCards.forEach((card, i) => {
-  card.addEventListener('click', () => openVideo(i));
-});
-
-vidClose.addEventListener('click', e => { e.stopPropagation(); closeVideo(); });
-vidPrev.addEventListener('click', e => { e.stopPropagation(); showVideo(vidIndex - 1); });
-vidNext.addEventListener('click', e => { e.stopPropagation(); showVideo(vidIndex + 1); });
-lightbox.addEventListener('click', e => { if (e.target === lightbox) closeVideo(); });
-
-// ── Image lightbox
 const imgPeek   = document.getElementById('imgPeek');
 const imgPeekEl = document.getElementById('imgPeekEl');
 const imgClose  = document.getElementById('imgClose');
 const imgPrev   = document.getElementById('imgPrev');
 const imgNext   = document.getElementById('imgNext');
-const imgCards  = [...document.querySelectorAll('.pg-item')];
-let imgIndex = 0;
 
-function showImage(i) {
-  imgIndex = (i + imgCards.length) % imgCards.length;
-  imgPeekEl.src = imgCards[imgIndex].querySelector('img').src;
-}
-function openPeek(i) {
-  showImage(i);
-  imgPeek.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closePeek() { imgPeek.classList.remove('open'); document.body.style.overflow = ''; }
-
-imgCards.forEach((card, i) => {
-  card.addEventListener('click', e => { e.preventDefault(); openPeek(i); });
+// Build one combined list: animations (videos) first, then sketches (images)
+const items = [];
+document.querySelectorAll('.pg-video').forEach(card => {
+  const v = card.querySelector('video');
+  items.push({ type: 'video', src: v.src, loop: card.hasAttribute('data-loop') });
+});
+document.querySelectorAll('.pg-item').forEach(card => {
+  const img = card.querySelector('img');
+  items.push({ type: 'image', src: img.src });
 });
 
-imgClose.addEventListener('click', e => { e.stopPropagation(); closePeek(); });
-imgPrev.addEventListener('click', e => { e.stopPropagation(); showImage(imgIndex - 1); });
-imgNext.addEventListener('click', e => { e.stopPropagation(); showImage(imgIndex + 1); });
-imgPeek.addEventListener('click', e => { if (e.target === imgPeek) closePeek(); });
+let current = 0;
 
-// ── Keyboard navigation
-document.addEventListener('keydown', e => {
-  if (lightbox.classList.contains('open')) {
-    if (e.key === 'Escape') closeVideo();
-    else if (e.key === 'ArrowLeft')  showVideo(vidIndex - 1);
-    else if (e.key === 'ArrowRight') showVideo(vidIndex + 1);
-  } else if (imgPeek.classList.contains('open')) {
-    if (e.key === 'Escape') closePeek();
-    else if (e.key === 'ArrowLeft')  showImage(imgIndex - 1);
-    else if (e.key === 'ArrowRight') showImage(imgIndex + 1);
+function show(i) {
+  current = (i + items.length) % items.length;
+  const item = items[current];
+  if (item.type === 'video') {
+    imgPeek.classList.remove('open');
+    imgPeekEl.src = '';
+    player.src = item.src;
+    player.loop = item.loop;
+    lightbox.classList.add('open');
+    player.play();
+  } else {
+    player.pause();
+    player.src = '';
+    lightbox.classList.remove('open');
+    imgPeekEl.src = item.src;
+    imgPeek.classList.add('open');
   }
+  document.body.style.overflow = 'hidden';
+}
+function closeAll() {
+  player.pause();
+  player.src = '';
+  player.loop = false;
+  lightbox.classList.remove('open');
+  imgPeek.classList.remove('open');
+  imgPeekEl.src = '';
+  document.body.style.overflow = '';
+}
+
+// Open from grid clicks
+document.querySelectorAll('.pg-video').forEach((card, i) => {
+  card.addEventListener('click', () => show(i));
+});
+const videoCount = document.querySelectorAll('.pg-video').length;
+document.querySelectorAll('.pg-item').forEach((card, j) => {
+  card.addEventListener('click', e => { e.preventDefault(); show(videoCount + j); });
+});
+
+// Arrow buttons (both lightboxes drive the same sequence)
+[vidPrev, imgPrev].forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); show(current - 1); }));
+[vidNext, imgNext].forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); show(current + 1); }));
+
+// Close buttons + backdrop
+vidClose.addEventListener('click', e => { e.stopPropagation(); closeAll(); });
+imgClose.addEventListener('click', e => { e.stopPropagation(); closeAll(); });
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeAll(); });
+imgPeek.addEventListener('click', e => { if (e.target === imgPeek) closeAll(); });
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open') && !imgPeek.classList.contains('open')) return;
+  if (e.key === 'Escape') closeAll();
+  else if (e.key === 'ArrowLeft')  show(current - 1);
+  else if (e.key === 'ArrowRight') show(current + 1);
 });
 </script>
 </body>
